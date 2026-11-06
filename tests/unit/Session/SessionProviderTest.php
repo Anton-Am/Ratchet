@@ -53,7 +53,7 @@ class SessionProviderTest extends AbstractMessageComponentTestCase {
         return 'Ratchet\Http\HttpServerInterface';
     }
 
-    public function classCaseProvider() {
+    public static function classCaseProvider() {
         return array(
             array('php', 'Php')
           , array('php_binary', 'PhpBinary')

@@ -16,7 +16,7 @@ class PhpHandlerTest extends TestCase {
         $this->_handler = new PhpHandler;
     }
 
-    public function serializedProvider() {
+    public static function serializedProvider() {
         return array(
             array(
                 '_sf2_attributes|a:2:{s:5:"hello";s:5:"world";s:4:"last";i:1332872102;}_sf2_flashes|a:0:{}'

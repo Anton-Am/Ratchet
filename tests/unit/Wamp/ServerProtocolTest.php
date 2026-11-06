@@ -26,7 +26,7 @@ class ServerProtocolTest extends TestCase {
         return new Connection;
     }
 
-    public function invalidMessageProvider() {
+    public static function invalidMessageProvider() {
         return [
             [0]
           , [3]
@@ -89,7 +89,7 @@ class ServerProtocolTest extends TestCase {
         $this->assertEquals($uri, $this->_app->last['onUnSubscribe'][1]);
     }
 
-    public function callProvider() {
+    public static function callProvider() {
         return [
             [2, 'a', 'b']
           , [2, ['a', 'b']]
@@ -163,7 +163,7 @@ class ServerProtocolTest extends TestCase {
         $this->assertEquals(2, count($this->_app->last['onPublish'][4]));
     }
 
-    public function eventProvider() {
+    public static function eventProvider() {
         return array(
             array('http://example.com', array('one', 'two'))
           , array('curie', array(array('hello' => 'world', 'herp' => 'derp')))
@@ -263,7 +263,7 @@ class ServerProtocolTest extends TestCase {
         $this->assertContains('wamp', $wamp->getSubProtocols());
     }
 
-    public function badFormatProvider() {
+    public static function badFormatProvider() {
         return array(
             array(json_encode(true))
           , array('{"valid":"json", "invalid": "message"}')

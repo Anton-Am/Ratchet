@@ -107,7 +107,7 @@ class RouterTest extends TestCase {
     }
 
     public function testControllerOnErrorBubbles() {
-        $e= new \Exception('One cannot be betrayed if one has no exceptions');
+        $e = new \Exception('One cannot be betrayed if one has no exceptions');
         $controller = $this->getMockBuilder('Ratchet\WebSocket\WsServer')->disableOriginalConstructor()->getMock();
         $controller->expects($this->once())->method('onError')->with($this->_conn, $e);
 

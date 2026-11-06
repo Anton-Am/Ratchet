@@ -16,7 +16,7 @@ class HttpRequestParserTest extends TestCase {
         $this->parser = new HttpRequestParser;
     }
 
-    public function headersProvider() {
+    public static function headersProvider() {
         return array(
             array(false, "GET / HTTP/1.1\r\nHost: socketo.me\r\n")
           , array(true,  "GET / HTTP/1.1\r\nHost: socketo.me\r\n\r\n")

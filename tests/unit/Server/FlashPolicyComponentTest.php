@@ -6,7 +6,7 @@ use Ratchet\Server\FlashPolicy;
 /**
  * @covers Ratchet\Server\FlashPolicy
  */
-class FlashPolicyTest extends TestCase {
+class FlashPolicyComponentTest extends TestCase {
 
     protected $_policy;
 

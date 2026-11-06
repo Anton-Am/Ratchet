@@ -6,7 +6,7 @@ use Ratchet\Server\IpBlackList;
 /**
  * @covers Ratchet\Server\IpBlackList
  */
-class IpBlackListTest extends TestCase {
+class IpBlackListComponentTest extends TestCase {
     protected $blocker;
     protected $mock;
 
@@ -100,7 +100,7 @@ class IpBlackListTest extends TestCase {
         $this->blocker->onError($conn, $e);
     }
 
-    public function addressProvider() {
+    public static function addressProvider() {
         return array(
             array('127.0.0.1', '127.0.0.1')
           , array('localhost', 'localhost')
