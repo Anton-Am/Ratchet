@@ -71,6 +71,10 @@ jobs:
           - "8.5"
         dependencies:
           - "highest"
+        include:
+          # Covers the declared floors (guzzlehttp/psr7 2.12.3, ratchet/rfc6455 0.4.1, Symfony 5.4).
+          - php-version: "8.0"
+            dependencies: "lowest"
 
     steps:
       - name: "Checkout"
