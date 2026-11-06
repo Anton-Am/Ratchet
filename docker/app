@@ -1,0 +1,125 @@
+#!/usr/bin/env bash
+#
+# Single entry point for local verification and the Docker test harness.
+#
+# Usage:
+#   docker/app check-deprecations [dir]   # E_ALL scan of [dir] (default: src) with the local PHP
+#   docker/app init                       # composer install in Docker, populating vendor/ on the host
+#   docker/app test                       # composer update + deprecation gate + phpunit in Docker
+#   docker/app lint                       # composer update + deprecation gate + phpcs + phpstan in Docker
+#   docker/app shell                      # interactive shell inside the container
+#   docker/app build                      # build all images
+#   PHP_VERSION=8.0 docker/app test       # run against a specific PHP version
+#
+# Supported PHP versions: 8.0, 8.1, 8.2, 8.3, 8.4 (default), 8.5.
+# Containers run as the calling user, so nothing in the working copy (vendor/
+# included) is ever owned by root.
+
+set -euo pipefail
+
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$REPO_ROOT"
+
+# Note: the official php images export PHP_VERSION (e.g. "8.4.27"), so the value
+# is only resolved for the actions that actually need a container.
+SERVICE=""
+
+resolve_service() {
+    local version="${PHP_VERSION:-8.4}"
+
+    case " 8.0 8.1 8.2 8.3 8.4 8.5 " in
+        *" $version "*) ;;
+        *)
+            echo "docker/app: unsupported PHP_VERSION '${version}' (expected 8.0 ... 8.5)" >&2
+            exit 1
+            ;;
+    esac
+
+    SERVICE="php${version//./}"
+}
+
+compose() {
+    docker compose -f docker/docker-compose.yml "$@"
+}
+
+# Run a service as the caller, with a writable composer home, so bind-mounted
+# files keep the ownership of the host user.
+run_service() {
+    compose run --rm --build \
+        --user "$(id -u):$(id -g)" \
+        --env HOME=/tmp \
+        --env COMPOSER_HOME=/tmp/composer \
+        "$SERVICE" "$@"
+}
+
+# Deprecation gate: compile every PHP file with error_reporting=E_ALL and fail on any
+# "Deprecated:" notice. Compile-time deprecations (implicit nullable parameters,
+# dynamic properties, ...) are what a new PHP version reports first, and they must
+# stay at zero for the supported range 8.0 ... 8.5.
+check_deprecations() {
+    local target="${1:-src}"
+    local file output
+    local count=0
+    local fail=0
+
+    if [ ! -d "$target" ]; then
+        echo "docker/app: directory not found: ${target}" >&2
+        return 1
+    fi
+
+    if ! command -v php >/dev/null 2>&1; then
+        echo "docker/app: php binary not found in PATH" >&2
+        return 1
+    fi
+
+    while IFS= read -r -d '' file; do
+        count=$((count + 1))
+        output="$(php -d error_reporting=E_ALL -d display_errors=1 -l "$file" 2>&1 || true)"
+        if printf '%s\n' "$output" | grep -q 'Deprecated:'; then
+            printf '%s\n' "$output"
+            fail=1
+        fi
+    done < <(find "$target" -name '*.php' -print0)
+
+    if [ "$fail" -ne 0 ]; then
+        echo "FAIL: deprecations reported under '${target}' on PHP $(php -r 'echo PHP_VERSION;')" >&2
+        return 1
+    fi
+
+    echo "OK: ${count} file(s) under '${target}' are deprecation-free on PHP $(php -r 'echo PHP_VERSION;')"
+}
+
+case "${1:-help}" in
+    check-deprecations)
+        check_deprecations "${2:-src}"
+        ;;
+    init)
+        # Populate ./vendor for the IDE and for local (non-Docker) runs.
+        resolve_service
+        run_service composer install --no-interaction --no-progress
+        ;;
+    test)
+        resolve_service
+        run_service
+        ;;
+    lint)
+        # Same gate as CI and `make lint`, but on the PHP version of the container.
+        resolve_service
+        run_service sh -c "composer update --no-interaction --no-progress \
+            && ./docker/app check-deprecations src \
+            && vendor/bin/phpcs \
+            && vendor/bin/phpstan analyse --no-progress"
+        ;;
+    shell)
+        resolve_service
+        run_service sh
+        ;;
+    build)
+        compose build
+        ;;
+    *)
+        echo "Usage: docker/app {check-deprecations|init|test|lint|shell|build} [dir]" >&2
+        echo "       PHP_VERSION=8.0 ... 8.5 (default 8.4) for init/test/lint/shell/build" >&2
+        exit 1
+        ;;
+esac

@@ -1,0 +1,57 @@
+x-run: &run
+  working_dir: /app
+  environment:
+    COMPOSER_HOME: "/tmp/composer"
+    HOME: "/tmp"
+  volumes:
+    # The project itself: `vendor/` and other artefacts end up on the host.
+    - ..:/app
+    - composer-cache:/tmp/composer
+  command: sh -c "composer update --no-interaction --no-progress && ./docker/app check-deprecations src && vendor/bin/phpunit"
+
+services:
+  php80:
+    <<: *run
+    build:
+      context: ..
+      dockerfile: docker/php/Dockerfile
+      args:
+        PHP_VERSION: "8.0"
+  php81:
+    <<: *run
+    build:
+      context: ..
+      dockerfile: docker/php/Dockerfile
+      args:
+        PHP_VERSION: "8.1"
+  php82:
+    <<: *run
+    build:
+      context: ..
+      dockerfile: docker/php/Dockerfile
+      args:
+        PHP_VERSION: "8.2"
+  php83:
+    <<: *run
+    build:
+      context: ..
+      dockerfile: docker/php/Dockerfile
+      args:
+        PHP_VERSION: "8.3"
+  php84:
+    <<: *run
+    build:
+      context: ..
+      dockerfile: docker/php/Dockerfile
+      args:
+        PHP_VERSION: "8.4"
+  php85:
+    <<: *run
+    build:
+      context: ..
+      dockerfile: docker/php/Dockerfile
+      args:
+        PHP_VERSION: "8.5"
+
+volumes:
+  composer-cache: {}

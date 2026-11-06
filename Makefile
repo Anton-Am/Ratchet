@@ -1,8 +1,24 @@
 # This file is intended to ease the author's development and testing process
 # Users do not need to use `make`; Ratchet does not need to be compiled
 
+install:
+	composer install
+
 test:
 	vendor/bin/phpunit
+
+lint:
+	./docker/app check-deprecations src
+	vendor/bin/phpcs
+	vendor/bin/phpstan analyse --no-progress
+
+check: lint test
+
+docker-test:
+	PHP_VERSION=$${PHP_VERSION:-8.4} docker/app test
+
+docker-lint:
+	PHP_VERSION=$${PHP_VERSION:-8.4} docker/app lint
 
 cover:
 	vendor/bin/phpunit --coverage-text --coverage-html=reports/coverage
@@ -40,3 +56,5 @@ apidocs:
 		-s vendor/symfony/routing \
 		-s vendor/evenement/evenement/src/Evenement \
 		--exclude=vendor/symfony/routing/Tests \
+
+.PHONY: install test lint check docker-test docker-lint cover abtests abtest profile apidocs
