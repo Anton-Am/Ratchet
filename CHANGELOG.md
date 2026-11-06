@@ -8,6 +8,17 @@ CHANGELOG
 
 ---
 
+## [Unreleased]
+
+### Removed
+
+* The `#[HackSupportForPHP8]` marker and the duplicated pre-PHP-8 `onOpen()` signatures in
+  `HttpServerInterface`, `Router`, `WsServer`, `OriginCheck`, `NoOpHttpServerController` and
+  `SessionProvider`. The marker only existed so that the `?RequestInterface $request = null` signature
+  could be hidden from PHP < 8.0 parsers (there `#[` starts a comment); with the `php >=8.0` floor only the
+  explicit nullable signature is ever parsed, so the fallback line was dead code. Behaviour is unchanged,
+  and six "`Attribute class ... does not exist`" PHPStan baseline entries are gone.
+
 ## [0.4.5] - 2026-11-06
 
 Personal packaging fork of `cboden/ratchet`, published as `anton-am/ratchet` from the `0.4.x` branch.
