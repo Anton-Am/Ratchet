@@ -1,0 +1,307 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Call to an undefined method Ratchet\\MessageComponentInterface\:\:addAllowedAccess\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/Ratchet/App.php
+
+		-
+			message: '#^Instanceof between Ratchet\\ComponentInterface and Ratchet\\WebSocket\\WsServer will always evaluate to false\.$#'
+			identifier: instanceof.alwaysFalse
+			count: 1
+			path: src/Ratchet/App.php
+
+		-
+			message: '#^Parameter \#1 \$component of class Ratchet\\Http\\OriginCheck constructor expects Ratchet\\MessageComponentInterface, Ratchet\\ComponentInterface given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Ratchet/App.php
+
+		-
+			message: '#^Parameter \#2 \$ports of method Ratchet\\Server\\FlashPolicy\:\:addAllowedAccess\(\) expects string, int given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Ratchet/App.php
+
+		-
+			message: '#^Property Ratchet\\App\:\:\$flashServer \(Ratchet\\Server\\IoServer\) in empty\(\) is not falsy\.$#'
+			identifier: empty.property
+			count: 1
+			path: src/Ratchet/App.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between false and false will always evaluate to true\.$#'
+			identifier: identical.alwaysTrue
+			count: 1
+			path: src/Ratchet/App.php
+
+		-
+			message: '#^Access to an undefined property Ratchet\\ConnectionInterface\:\:\$httpBuffer\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/Ratchet/Http/HttpRequestParser.php
+
+		-
+			message: '#^Method Ratchet\\Http\\HttpRequestParser\:\:onMessage\(\) should return Psr\\Http\\Message\\RequestInterface but return statement is missing\.$#'
+			identifier: return.missing
+			count: 1
+			path: src/Ratchet/Http/HttpRequestParser.php
+
+		-
+			message: '#^Access to an undefined property Ratchet\\ConnectionInterface\:\:\$httpHeadersReceived\.$#'
+			identifier: property.notFound
+			count: 4
+			path: src/Ratchet/Http/HttpServer.php
+
+		-
+			message: '#^Method Ratchet\\Http\\HttpServer\:\:close\(\) should return null but return statement is missing\.$#'
+			identifier: return.missing
+			count: 1
+			path: src/Ratchet/Http/HttpServer.php
+
+		-
+			message: '#^PHPDoc tag @param has invalid value \(HttpServerInterface\)\: Unexpected token "\\n     ", expected variable at offset 37 on line 2$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: src/Ratchet/Http/HttpServer.php
+
+		-
+			message: '#^Attribute class Ratchet\\Http\\HackSupportForPHP8 does not exist\.$#'
+			identifier: attribute.notFound
+			count: 1
+			path: src/Ratchet/Http/HttpServerInterface.php
+
+		-
+			message: '#^Attribute class Ratchet\\Http\\HackSupportForPHP8 does not exist\.$#'
+			identifier: attribute.notFound
+			count: 1
+			path: src/Ratchet/Http/NoOpHttpServerController.php
+
+		-
+			message: '#^Attribute class Ratchet\\Http\\HackSupportForPHP8 does not exist\.$#'
+			identifier: attribute.notFound
+			count: 1
+			path: src/Ratchet/Http/OriginCheck.php
+
+		-
+			message: '#^Method Ratchet\\ComponentInterface\:\:onOpen\(\) invoked with 2 parameters, 1 required\.$#'
+			identifier: arguments.count
+			count: 1
+			path: src/Ratchet/Http/OriginCheck.php
+
+		-
+			message: '#^Method Ratchet\\Http\\OriginCheck\:\:close\(\) should return null but return statement is missing\.$#'
+			identifier: return.missing
+			count: 1
+			path: src/Ratchet/Http/OriginCheck.php
+
+		-
+			message: '#^Access to an undefined property Ratchet\\ConnectionInterface\:\:\$controller\.$#'
+			identifier: property.notFound
+			count: 2
+			path: src/Ratchet/Http/Router.php
+
+		-
+			message: '#^Attribute class Ratchet\\Http\\HackSupportForPHP8 does not exist\.$#'
+			identifier: attribute.notFound
+			count: 1
+			path: src/Ratchet/Http/Router.php
+
+		-
+			message: '#^Method Ratchet\\Http\\Router\:\:close\(\) should return null but return statement is missing\.$#'
+			identifier: return.missing
+			count: 1
+			path: src/Ratchet/Http/Router.php
+
+		-
+			message: '#^Property Ratchet\\Server\\FlashPolicy\:\:\$_cacheValid \(string\) does not accept default value of type false\.$#'
+			identifier: property.defaultValue
+			count: 1
+			path: src/Ratchet/Server/FlashPolicy.php
+
+		-
+			message: '#^Property Ratchet\\Server\\FlashPolicy\:\:\$_cacheValid \(string\) does not accept false\.$#'
+			identifier: assign.propertyType
+			count: 3
+			path: src/Ratchet/Server/FlashPolicy.php
+
+		-
+			message: '#^Property Ratchet\\Server\\FlashPolicy\:\:\$_cacheValid \(string\) does not accept true\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/Ratchet/Server/FlashPolicy.php
+
+		-
+			message: '#^Access to an undefined property Ratchet\\Server\\IoConnection\:\:\$remoteAddress\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/Ratchet/Server/IoServer.php
+
+		-
+			message: '#^Access to an undefined property Ratchet\\Server\\IoConnection\:\:\$resourceId\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/Ratchet/Server/IoServer.php
+
+		-
+			message: '#^Access to an undefined property React\\Socket\\ConnectionInterface\:\:\$decor\.$#'
+			identifier: property.notFound
+			count: 4
+			path: src/Ratchet/Server/IoServer.php
+
+		-
+			message: '#^Access to an undefined property React\\Socket\\ConnectionInterface\:\:\$stream\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/Ratchet/Server/IoServer.php
+
+		-
+			message: '#^Parameter \#1 \$callback of function set_error_handler expects \(callable\(int, string, string, int\)\: bool\)\|null, Closure\(\)\: void given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Ratchet/Server/IoServer.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: src/Ratchet/Server/IoServer.php
+
+		-
+			message: '#^Access to an undefined property Ratchet\\ConnectionInterface\:\:\$remoteAddress\.$#'
+			identifier: property.notFound
+			count: 3
+			path: src/Ratchet/Server/IpBlackList.php
+
+		-
+			message: '#^PHPDoc tag @param has invalid value \(array\)\: Unexpected token "\\n     \* ", expected variable at offset 23 on line 2$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: src/Ratchet/Session/Serialize/HandlerInterface.php
+
+		-
+			message: '#^PHPDoc tag @param has invalid value \(string\)\: Unexpected token "\\n     \* ", expected variable at offset 24 on line 2$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: src/Ratchet/Session/Serialize/HandlerInterface.php
+
+		-
+			message: '#^Access to an undefined property Ratchet\\ConnectionInterface\:\:\$Session\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/Ratchet/Session/SessionProvider.php
+
+		-
+			message: '#^Attribute class Ratchet\\Session\\HackSupportForPHP8 does not exist\.$#'
+			identifier: attribute.notFound
+			count: 1
+			path: src/Ratchet/Session/SessionProvider.php
+
+		-
+			message: '#^Method Ratchet\\ComponentInterface\:\:onOpen\(\) invoked with 2 parameters, 1 required\.$#'
+			identifier: arguments.count
+			count: 1
+			path: src/Ratchet/Session/SessionProvider.php
+
+		-
+			message: '#^Access to an undefined property Ratchet\\ConnectionInterface\:\:\$WAMP\.$#'
+			identifier: property.notFound
+			count: 6
+			path: src/Ratchet/Wamp/TopicManager.php
+
+		-
+			message: '#^PHPDoc tag @param has invalid value \(string\)\: Unexpected token "\\n     \* ", expected variable at offset 24 on line 2$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: src/Ratchet/Wamp/TopicManager.php
+
+		-
+			message: '#^Method Ratchet\\ConnectionInterface\:\:close\(\) invoked with 1 parameter, 0 required\.$#'
+			identifier: arguments.count
+			count: 1
+			path: src/Ratchet/Wamp/WampConnection.php
+
+		-
+			message: '#^Method Ratchet\\Wamp\\WampConnection\:\:callError\(\) should return Ratchet\\Wamp\\WampConnection but returns Ratchet\\ConnectionInterface\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Ratchet/Wamp/WampConnection.php
+
+		-
+			message: '#^Method Ratchet\\Wamp\\WampConnection\:\:callResult\(\) should return Ratchet\\Wamp\\WampConnection but returns Ratchet\\ConnectionInterface\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Ratchet/Wamp/WampConnection.php
+
+		-
+			message: '#^Method Ratchet\\Wamp\\WampConnection\:\:event\(\) should return Ratchet\\Wamp\\WampConnection but returns Ratchet\\ConnectionInterface\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Ratchet/Wamp/WampConnection.php
+
+		-
+			message: '#^Method Ratchet\\Wamp\\WampConnection\:\:prefix\(\) should return Ratchet\\Wamp\\WampConnection but returns Ratchet\\ConnectionInterface\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Ratchet/Wamp/WampConnection.php
+
+		-
+			message: '#^Parameter \#1 \$prefix of function uniqid expects string, int\<0, max\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Ratchet/Wamp/WampConnection.php
+
+		-
+			message: '#^Method Ratchet\\ConnectionInterface\:\:close\(\) invoked with 1 parameter, 0 required\.$#'
+			identifier: arguments.count
+			count: 1
+			path: src/Ratchet/Wamp/WampServer.php
+
+		-
+			message: '#^PHPDoc tag @var has invalid value \(\\Ratchet\\RFC6455\\Messaging\\MessageBuffer;\)\: Unexpected token ";", expected TOKEN_HORIZONTAL_WS at offset 56 on line 2$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: src/Ratchet/WebSocket/ConnContext.php
+
+		-
+			message: '#^PHPDoc tag @param has invalid value \(int\|\\Ratchet\\RFC6455\\Messaging\\DataInterface\)\: Unexpected token "\\n     ", expected variable at offset 62 on line 2$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: src/Ratchet/WebSocket/WsConnection.php
+
+		-
+			message: '#^Access to an undefined property Ratchet\\ConnectionInterface\:\:\$WebSocket\.$#'
+			identifier: property.notFound
+			count: 2
+			path: src/Ratchet/WebSocket/WsServer.php
+
+		-
+			message: '#^Access to an undefined property Ratchet\\ConnectionInterface\:\:\$httpRequest\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/Ratchet/WebSocket/WsServer.php
+
+		-
+			message: '#^Attribute class Ratchet\\WebSocket\\HackSupportForPHP8 does not exist\.$#'
+			identifier: attribute.notFound
+			count: 1
+			path: src/Ratchet/WebSocket/WsServer.php
+
+		-
+			message: '#^Call to an undefined method Ratchet\\ComponentInterface\:\:onMessage\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: src/Ratchet/WebSocket/WsServer.php
+
+		-
+			message: '#^Class Ratchet\\RFC6455\\Handshake\\ServerNegotiator constructor invoked with 1 parameter, 2\-3 required\.$#'
+			identifier: arguments.count
+			count: 1
+			path: src/Ratchet/WebSocket/WsServer.php
+
+		-
+			message: '#^Method Ratchet\\WebSocket\\WsServer\:\:close\(\) should return null but return statement is missing\.$#'
+			identifier: return.missing
+			count: 1
+			path: src/Ratchet/WebSocket/WsServer.php

@@ -3,3 +3,7 @@ reports
 sandbox
 vendor
 composer.lock
+.phpunit.cache
+.phpunit.result.cache
+.phpstan.cache
+.phpcs-cache

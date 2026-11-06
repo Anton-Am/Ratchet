@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<ruleset name="Ratchet">
+    <description>PSR-12 for the Ratchet 0.4.x personal packaging fork.</description>
+
+    <file>src</file>
+    <file>tests</file>
+
+    <arg name="extensions" value="php"/>
+    <arg name="colors"/>
+    <arg name="basepath" value="."/>
+
+    <rule ref="PSR12">
+        <!--
+            The 0.4.x code base is upstream's and is not PSR-12 formatted: braces on
+            their own line, `$_property` naming, `new Foo;`, missing method visibility,
+            long lines and upstream's indentation. Those sniffs are switched off so the
+            gate is green today and can be tightened incrementally (see
+            docs/conventions.md); every other PSR-12 sniff stays enforced, so new files
+            must be written in PSR-12.
+        -->
+
+        <!-- formatting: brace/indentation/whitespace house style -->
+        <exclude name="Squiz.Functions.MultiLineFunctionDeclaration"/>
+        <exclude name="PSR12.Files.FileHeader"/>
+        <exclude name="Generic.Files.LineLength"/>
+        <exclude name="Generic.WhiteSpace.ScopeIndent"/>
+        <exclude name="Squiz.WhiteSpace.SuperfluousWhitespace"/>
+        <exclude name="Squiz.WhiteSpace.ScopeClosingBrace"/>
+        <exclude name="Squiz.WhiteSpace.ControlStructureSpacing"/>
+        <exclude name="Squiz.ControlStructures.ControlSignature"/>
+        <exclude name="PSR2.ControlStructures.SwitchDeclaration"/>
+        <exclude name="PSR2.Methods.FunctionCallSignature"/>
+        <exclude name="Generic.Functions.FunctionCallArgumentSpacing"/>
+        <exclude name="Generic.Formatting.DisallowMultipleStatements"/>
+        <exclude name="PSR2.Files.EndFileNewline"/>
+
+        <!-- class/member declarations of the legacy code base -->
+        <exclude name="PSR2.Classes.ClassDeclaration"/>
+        <exclude name="PSR12.Classes.OpeningBraceSpace"/>
+        <exclude name="PSR12.Classes.ClassInstantiation"/>
+        <exclude name="PSR2.Classes.PropertyDeclaration"/>
+        <exclude name="PSR12.Properties.ConstantVisibility"/>
+        <exclude name="Squiz.Scope.MethodScope"/>
+        <exclude name="PSR1.Classes.ClassDeclaration"/>
+        <exclude name="PSR1.Files.SideEffects"/>
+    </rule>
+</ruleset>

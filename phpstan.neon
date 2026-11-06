@@ -1,0 +1,29 @@
+# Static analysis for the 0.4.x personal packaging fork.
+#
+# phpstan-baseline.neon pins the errors that the upstream code base already
+# contains (undeclared properties on connections, missing type declarations,
+# ...). The baseline may only shrink: fix errors instead of appending new ones.
+# Regenerate it with:
+#
+#     vendor/bin/phpstan analyse --generate-baseline
+#
+parameters:
+    level: 5
+    paths:
+        - src
+    # The 0.4.x code base predates strict typing; docblocks document intent but
+    # are not treated as a certainty.
+    treatPhpDocTypesAsCertain: false
+    excludePaths:
+        # Symfony session storage shims: one class extends a different Symfony
+        # major depending on the installed version, so native return types drift
+        # across Symfony 5.4 ... 8.0. Behaviour is covered by the PHPUnit suite.
+        analyse:
+            - src/Ratchet/Session/Storage/VirtualSessionStorage.php
+            - src/Ratchet/Session/Storage/VirtualSessionStorageForSymfony6.php
+            - src/Ratchet/Session/Storage/VirtualSessionStorageForSymfony7.php
+            - src/Ratchet/Session/Storage/Proxy/VirtualProxy.php
+            - src/Ratchet/Session/Storage/Proxy/VirtualProxyForSymfony6.php
+
+includes:
+    - phpstan-baseline.neon
