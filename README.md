@@ -20,7 +20,8 @@ Why fork instead of using `cboden/ratchet` directly:
 * the dependency floors need to be raised: `guzzlehttp/psr7 ^2.12.3` (1.x, and 2.x `< 2.12.3`, are affected
   by security advisories) and `ratchet/rfc6455 ^0.4.1` (0.3.x emits deprecations on PHP 8.4);
 * the package declares `replace: cboden/ratchet`, so it is a drop-in replacement for anything requiring
-  `cboden/ratchet ^0.4` (for example `thruway/ratchet-transport`) while projects migrate.
+  `cboden/ratchet ^0.4` — as long as that package does not itself demand `guzzlehttp/psr7 ^1.x`
+  (`thruway/ratchet-transport` 0.5.x does, so it cannot coexist with this fork; drop it instead).
 
 Differences from upstream `v0.4.4`:
 

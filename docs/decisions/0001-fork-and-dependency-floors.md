@@ -34,5 +34,12 @@ Upstream's constraints also stay open to versions we cannot use:
   PHP 8.0 – 8.5).
 * `anton-am/ratchet` must keep the `cboden/ratchet` public API intact, otherwise `replace` becomes a lie.
   See rule 4 in [`../conventions.md`](../conventions.md).
+* `psr7 ^2.12.3 || ^3.0` resolves to `3.x` unless the consumer pins `guzzlehttp/psr7:^2.13` (then
+  `2.13.x` is installed); both are satisfiable, the test suite runs against the resolved highest set and
+  the CI "lowest" leg covers the `2.12.3` floor.
+* `thruway/ratchet-transport` **0.5.0 requires `guzzlehttp/psr7 ^1.4`**, so it cannot be installed
+  alongside this fork: `replace` satisfies the `cboden/ratchet ^0.4` requirement, but not thruway's own
+  psr7 1.x constraint (and Composer's advisory policy blocks psr7 `< 2.12.3` anyway). Consumers must drop
+  thruway instead of relying on `replace` for it.
 * Alternative considered and rejected: `"cboden/ratchet": "0.4.x-dev"` — a dev version without a tag and
   without control over constraints.
