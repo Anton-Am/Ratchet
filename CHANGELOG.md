@@ -8,6 +8,32 @@ CHANGELOG
 
 ---
 
+## [0.4.5] - 2026-11-06
+
+Personal packaging fork of `cboden/ratchet`, published as `anton-am/ratchet` from the `0.4.x` branch.
+
+### Changed
+
+* Package renamed to `anton-am/ratchet`; `replace: cboden/ratchet` added, so the fork is a drop-in
+  substitute for anything requiring `cboden/ratchet ^0.4`.
+* Minimum PHP raised to `>=8.0`; the CI matrix is now `8.0` – `8.5` (5.x/7.x dropped).
+* `guzzlehttp/psr7` raised to `^2.12.3 || ^3.0` (1.x, and 2.x `< 2.12.3`, are affected by security advisories).
+* `ratchet/rfc6455` raised to `^0.4.1` (0.3.x emits deprecations on PHP 8.4).
+* `symfony/http-foundation` and `symfony/routing` floor raised to `^5.4`; `react/socket` and
+  `react/event-loop` pinned to `^1.0`.
+* Test suite made compatible with PHPUnit 9.6 / 10.5 / 11.5 (static data providers, `onlyMethods()`,
+  class names aligned with file names).
+
+### Added
+
+* Deprecation gate (`./docker/app check-deprecations`) — `error_reporting=E_ALL` scan of `src/`, wired into
+  CI, `make lint` and `docker/app test`.
+* Docker test harness (`docker/`, `docker/app test`) for PHP 8.0 – 8.5.
+* PHPCS (PSR-12) and PHPStan (level 5) configuration, `composer validate --strict` in CI.
+* `CONTRIBUTING.md`, `docs/conventions.md`, pull request template, `.editorconfig`, `.gitattributes`.
+
+---
+
 * 0.4.4 (2021-12-11)
   * Correct and update dependencies for forward compatibility
   * Added context for React Socket server to App
